@@ -13,6 +13,7 @@ namespace GestoreEventi
          */
         public string Title { get; set; }
 
+        /*
         private List<Event> _events;
         public List<Event> Events
         {
@@ -25,7 +26,10 @@ namespace GestoreEventi
                 _events = value;
             }
         }
-        public int NumberOfEvents => _events.Count;
+        */
+        public List<Event> Events { get; private set; }
+
+        public int NumberOfEvents => Events.Count;
 
         //EVENTsSCHEDULE's CONSTRUCTOR
         internal EventsSchedule(string title)
@@ -39,7 +43,7 @@ namespace GestoreEventi
          */
         public void Add(Event e)
         {
-            _events.Add(e);
+            Events.Add(e);
         }
         public List<Event> GetEventsByDate(DateTime date)
         {
@@ -54,12 +58,12 @@ namespace GestoreEventi
         }
         public void ClearEvents()
         {
-            _events.Clear();
+            Events.Clear();
         }
         public override string ToString()
         {
             return $"{Title}:\r\n"
-                + EventsToString(_events);
+                + EventsToString(Events);
         }
     }
 }
