@@ -79,5 +79,11 @@ namespace GestoreEventi
             UnlockCursor();
             return result;
         }
+
+        //ASK FOR INPUT STRING AND CAST TO INTEGER
+        internal static int AskInt()
+        {
+            return AskStringToCast((input) => Convert.ToInt32(input));
+        }
     }
 }

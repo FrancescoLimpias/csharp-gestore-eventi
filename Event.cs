@@ -39,7 +39,7 @@ namespace GestoreEventi
             {
                 //check if Date has passed
                 if (DateTime.Now > value)
-                    throw new ArgumentException($"The given Date is passed! \"{value}\"");
+                    throw new ArgumentException($"The given Date has passed! \"{value}\"");
                 _date = value;
             }
         }

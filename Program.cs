@@ -18,16 +18,20 @@
 
             //Ask for its date
             Console.Write("Please, insert a Date (dd/MM/yyyy hh:mm): ");
-            DateTime date = UConsole.AskStringToCast((input) => DateTime.Parse(input + ":00"));
+            DateTime eventDate = UConsole.AskStringToCast((input) => DateTime.Parse(input + ":00"));
 
             //Ask for its capacity
             Console.Write("Please, insert a Capacity: ");
-            int capacity = UConsole.AskStringToCast((input) => Convert.ToInt32(input));
+            int eventCapacity = UConsole.AskInt();
+                
+            //Instantiate Event
+            Event newEvent = new Event(eventName, eventDate, eventCapacity);
+            Console.WriteLine();
+            Console.WriteLine($"Event created: {newEvent.ToString()}");
 
-
-
-            //Event e = new Event("Evento Prova", new DateTime(2023, 10, 4, 9, 13, 10), 100);
-            //Console.WriteLine(e.ToString());
+            //Ask for booked seats
+            Console.Write("Please, insert booked seats: ");
+            newEvent.BookSeats(UConsole.AskInt());
         }
     }
 }
