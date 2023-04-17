@@ -45,6 +45,15 @@
             }
 
             /* ***********
+             * ADDING CONFERNCES
+             */
+            ES.Add(new Conference("Conference A", new DateTime(2026, 03, 03, 10, 10, 10), 300, "Marco Rossi", 30.50));
+            ES.Add(new Conference("Conference B", new DateTime(2026, 04, 23, 09, 10, 10), 300, "Luca Bianchi", 20.50));
+            ES.Add(new Conference("Conference C", new DateTime(2025, 10, 02, 17, 10, 10), 300, "Mauro Verdi", 10.50));
+
+
+
+            /* ***********
              * PRINTING
              */
             //details
