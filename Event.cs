@@ -60,7 +60,7 @@ namespace GestoreEventi
             }
         }
 
-        public int BookedSeats { get; }
+        public int BookedSeats { get; private set; }
 
         public int AvailableSeats
         {
@@ -88,6 +88,16 @@ namespace GestoreEventi
         }
 
         //EVENT's METHODS
-        //...
+        public void BookSeats(int requestedSeats)
+        {
+            int availableSeats = AvailableSeats;
+            //check if requirements are met
+            if(availableSeats < requestedSeats)
+            {
+                throw new Exception($"The seats availability({availableSeats}) is lower than the requested number of seats({requestedSeats})! Excess: {requestedSeats - availableSeats}");
+            }
+            //save booked seats
+            BookedSeats += requestedSeats;
+        }
     }
 }
