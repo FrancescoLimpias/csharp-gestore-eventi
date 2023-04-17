@@ -114,7 +114,7 @@ namespace GestoreEventi
         public override string ToString()
         {
             //return $"{Date.ToString("dd/MM/yyyy")} - {Title}";
-            return $"{DateTimeToString()} - {Title}";
+            return $"[{DateTimeToString()}] {Title}";
         }
 
         public string StatusToString()

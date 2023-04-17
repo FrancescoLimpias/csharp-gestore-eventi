@@ -32,7 +32,11 @@
                 Event newEvent;
                 try
                 {
+                    //Insert an event
+                    Console.WriteLine("EVENT");
                     newEvent = AskToCreateEvent();
+                    Console.WriteLine($"Event created: {newEvent.ToString()}");
+                    Console.WriteLine();
                 }
                 catch (Exception e)
                 {
@@ -47,9 +51,28 @@
             /* ***********
              * ADDING CONFERNCES
              */
-            ES.Add(new Conference("Conference A", new DateTime(2026, 03, 03, 10, 10, 10), 300, "Marco Rossi", 30.50));
-            ES.Add(new Conference("Conference B", new DateTime(2026, 04, 23, 09, 10, 10), 300, "Luca Bianchi", 20.50));
-            ES.Add(new Conference("Conference C", new DateTime(2025, 10, 02, 17, 10, 10), 300, "Mauro Verdi", 10.50));
+            while (ES.NumberOfEvents < scheduleNumberOfEvents + 1)
+            {
+                Console.WriteLine();
+
+                Conference newConference;
+                try
+                {
+                    //Insert an event
+                    Console.WriteLine("CONFERENCE");
+                    newConference = AskToCreateConference();
+                    Console.WriteLine($"Conference created: {newConference.ToString()}");
+                    Console.WriteLine();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"ERR - {e.Message}");
+                    continue;
+                }
+
+                //Finally add the event to the schedule
+                ES.Add(newConference);
+            }
 
 
 
@@ -80,11 +103,37 @@
 
         }
 
+        internal static Conference AskToCreateConference()
+        {
+            //Get main event parameters
+            Event? baseConferenceEvent = null;
+            while (baseConferenceEvent == null)
+            {
+                try
+                {
+                    baseConferenceEvent = AskToCreateEvent();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"ERR - {e.Message}");
+                }
+            }
+
+            //ASk for its speaker
+            Console.Write("Please, insert the Speaker: ");
+            string conferenceSpeaker = UConsole.AskString();
+
+            //Ask for the price
+            Console.Write("Please, insert the Price: ");
+            double conferencePrice = UConsole.AskStringToCast((price) => Convert.ToDouble(price));
+
+            //Instantiate Conference
+            return new Conference(baseConferenceEvent.Title, baseConferenceEvent.Date, baseConferenceEvent.Capacity, conferenceSpeaker, conferencePrice);
+
+        }
+
         internal static Event AskToCreateEvent()
         {
-
-            //Insert an event
-            Console.WriteLine("EVENT");
 
             //ASk for its title
             Console.Write("Please, insert a Title: ");
@@ -100,9 +149,6 @@
 
             //Instantiate Event
             Event newEvent = new Event(eventName, eventDate, eventCapacity);
-            Console.WriteLine();
-            Console.WriteLine($"Event created: {newEvent.ToString()}");
-            Console.WriteLine();
 
             /* THIS WAS FOR MILESTONE 2
             //Ask for booked seats
@@ -142,5 +188,7 @@
 
             return newEvent;
         }
+
+
     }
 }
