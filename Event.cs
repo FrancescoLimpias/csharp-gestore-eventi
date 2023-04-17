@@ -115,5 +115,12 @@ namespace GestoreEventi
         {
             return $"{Date.ToString("dd/MM/yyyy")} - {Title}";
         }
+
+        public string StatusToString()
+        {
+            return 
+                $"Booked seats: {BookedSeats}\r\n"
+                + $"Available seats: {AvailableSeats}";
+        }
     }
 }

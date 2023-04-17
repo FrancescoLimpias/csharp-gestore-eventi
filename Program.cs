@@ -32,6 +32,10 @@
             //Ask for booked seats
             Console.Write("Please, insert booked seats: ");
             newEvent.BookSeats(UConsole.AskInt());
+
+            //Print Availability Status
+            Console.WriteLine();
+            Console.WriteLine(newEvent.StatusToString());
         }
     }
 }
