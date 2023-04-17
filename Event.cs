@@ -66,12 +66,7 @@ namespace GestoreEventi
         {
             get
             {
-                if (
-                    //event has passed?
-                    DateTime.Now > Date
-                    //event capacity is set to 0
-                    || Capacity == 0
-                    )
+                if (Capacity == 0)
                     return 0;
 
                 return Capacity - BookedSeats;
@@ -87,17 +82,38 @@ namespace GestoreEventi
             BookedSeats = 0;
         }
 
-        //EVENT's METHODS
+        /* *******************
+         * EVENT's METHODS
+         */
         public void BookSeats(int requestedSeats)
         {
             int availableSeats = AvailableSeats;
+
+            //event already ended
+            if (DateTime.Now > Date)
+                throw new Exception("This Event has already passed!");
             //check if requirements are met
-            if(availableSeats < requestedSeats)
-            {
+            if (availableSeats < requestedSeats)
                 throw new Exception($"The seats availability({availableSeats}) is lower than the requested number of seats({requestedSeats})! Excess: {requestedSeats - availableSeats}");
-            }
             //save booked seats
             BookedSeats += requestedSeats;
+        }
+
+        public void CancelBookedSeats(int canceledSeats)
+        {
+            //event already ended
+            if (DateTime.Now > Date)
+                throw new Exception("This Event has already passed!");
+            //seats cancelation overflow
+            if (canceledSeats > BookedSeats)
+                throw new Exception($"Trying to cancel more seats({canceledSeats}) that booked({BookedSeats})! Excess: {canceledSeats - BookedSeats}");
+            //cancel seats
+            BookedSeats -= canceledSeats;
+        }
+
+        public override string ToString()
+        {
+            return $"{Date.ToString("dd/MM/yyyy")} - {Title}";
         }
     }
 }
