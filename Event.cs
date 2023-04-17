@@ -113,7 +113,8 @@ namespace GestoreEventi
 
         public override string ToString()
         {
-            return $"{Date.ToString("dd/MM/yyyy")} - {Title}";
+            //return $"{Date.ToString("dd/MM/yyyy")} - {Title}";
+            return $"{DateTimeToString()} - {Title}";
         }
 
         public string StatusToString()
@@ -121,6 +122,10 @@ namespace GestoreEventi
             return 
                 $"Booked seats: {BookedSeats}\r\n"
                 + $"Available seats: {AvailableSeats}";
+        }
+        public string DateTimeToString()
+        {
+            return Date.ToString();
         }
     }
 }
