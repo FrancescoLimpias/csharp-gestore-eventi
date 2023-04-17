@@ -51,7 +51,7 @@ namespace GestoreEventi
             {
                 return _capacity;
             }
-            set
+            private set
             {
                 //check if Capacity is positive
                 if (value < 0)
@@ -60,7 +60,23 @@ namespace GestoreEventi
             }
         }
 
-        public int Booked { get; }
+        public int BookedSeats { get; }
+
+        public int AvailableSeats
+        {
+            get
+            {
+                if (
+                    //event has passed?
+                    DateTime.Now > Date
+                    //event capacity is set to 0
+                    || Capacity == 0
+                    )
+                    return 0;
+
+                return Capacity - BookedSeats;
+            }
+        }
 
         //EVENT's CONSTRUCTOR
         internal Event(string title, DateTime date, int capacity)
@@ -68,7 +84,7 @@ namespace GestoreEventi
             Title = title;
             Date = date;
             Capacity = capacity;
-            Booked = 0;
+            BookedSeats = 0;
         }
 
         //EVENT's METHODS
